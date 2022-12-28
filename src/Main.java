@@ -28,8 +28,22 @@ public class Main {
 //        System.out.println(returnRevertAlpha(inputString3));
 
         // 중복 문자 제거
-        String inputString4 = in.nextLine();
-        System.out.println(returnRemoveduplication(inputString4));
+//        String inputString4 = in.nextLine();
+//        System.out.println(returnRemoveduplication(inputString4));
+
+        // 회문 문자열
+//        String inputString5 = in.nextLine();
+//        System.out.println(returnPalindrome(inputString5));
+
+//        String inputString6 = in.nextLine();
+//        System.out.println(returnPalindrome(inputString6));
+    }
+
+    private static String returnPalindrome(String inputString5) {
+        String newString = inputString5.toUpperCase().replaceAll("[^A-Z]", "");
+        StringBuilder builder = new StringBuilder(newString);
+        return builder.toString().equals(builder.reverse().toString()) ? "YES" : "NO";
+
     }
 
     private static StringBuilder returnRemoveduplication(String inputString4) {
