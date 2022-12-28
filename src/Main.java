@@ -37,6 +37,20 @@ public class Main {
 
 //        String inputString6 = in.nextLine();
 //        System.out.println(returnPalindrome(inputString6));
+
+        // 숫자만 추출
+        String inputString7 = in.nextLine();
+        System.out.println(returnExtractNum(inputString7));
+    }
+
+    private static int returnExtractNum(String inputString7) {
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < inputString7.length(); i++) {
+            if (Character.isDigit(inputString7.charAt(i))) {
+                builder.append(inputString7.charAt(i));
+            }
+        }
+        return Integer.parseInt(builder.toString());
     }
 
     private static String returnPalindrome(String inputString5) {
