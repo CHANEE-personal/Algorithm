@@ -1,5 +1,4 @@
 import java.util.Scanner;
-import java.util.regex.Pattern;
 
 public class Main {
     public static void main(String[] args) {
@@ -39,8 +38,57 @@ public class Main {
 //        System.out.println(returnPalindrome(inputString6));
 
         // 숫자만 추출
-        String inputString7 = in.nextLine();
-        System.out.println(returnExtractNum(inputString7));
+//        String inputString7 = in.nextLine();
+//        System.out.println(returnExtractNum(inputString7));
+
+        // 가장 짧은 문자거리
+//        String inputString8 = in.next();
+//        char input = in.next().charAt(0);
+//        for(int x : returnDistance(inputString8, input)){
+//            System.out.print(x+" ");
+//        }
+
+        // 문자열 압축
+        String inputString9 = in.next();
+        System.out.println(returnCompression(inputString9));
+    }
+
+    private static StringBuilder returnCompression(String inputString9) {
+        StringBuilder builder = new StringBuilder();
+        inputString9 = inputString9+" ";
+        int count = 1;
+        for (int i = 0; i < inputString9.length() - 1; i++) {
+            if (inputString9.charAt(i) == inputString9.charAt(i+1)) count++;
+            else {
+                builder.append(inputString9.charAt(i));
+                if (count > 1) builder.append(count);
+                count = 1;
+            }
+        }
+        return builder;
+    }
+
+    private static int[] returnDistance(String inputString8, char input) {
+        int[] result = new int[inputString8.length()];
+        int count = 1000;
+        for (int i = 0; i < inputString8.length(); i++) {
+            if (inputString8.charAt(i) == input) {
+                count = 0;
+                result[i] = count;
+            } else {
+                count++;
+                result[i] = count;
+            }
+        }
+        count = 1000;
+        for (int i = inputString8.length() - 1; i >= 0; i--) {
+            if (inputString8.charAt(i) == input) count = 0;
+            else {
+                count++;
+                result[i] = Math.min(result[i], count);
+            }
+        }
+        return result;
     }
 
     private static int returnExtractNum(String inputString7) {
@@ -76,12 +124,12 @@ public class Main {
         char[] chars = inputString3.toCharArray();
 
         while (first < last) {
-            if(!Character.isAlphabetic(chars[first])) first++;
-            else if(!Character.isAlphabetic(chars[last])) last--;
-            else{
-                char tmp=chars[first];
-                chars[first]=chars[last];
-                chars[last]=tmp;
+            if (!Character.isAlphabetic(chars[first])) first++;
+            else if (!Character.isAlphabetic(chars[last])) last--;
+            else {
+                char tmp = chars[first];
+                chars[first] = chars[last];
+                chars[last] = tmp;
                 first++;
                 last--;
             }
