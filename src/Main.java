@@ -1,7 +1,12 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.Scanner;
+import java.util.StringTokenizer;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Scanner in = new Scanner(System.in);
         // 문자열 찾기
 //        String inputString = in.nextLine().toUpperCase();
@@ -49,8 +54,124 @@ public class Main {
 //        }
 
         // 문자열 압축
-        String inputString9 = in.next();
-        System.out.println(returnCompression(inputString9));
+//        String inputString9 = in.next();
+//        System.out.println(returnCompression(inputString9));
+//
+//        // 큰 수 출력하기
+//        int inputNum = in.nextInt();
+//        System.out.println(returnBiggerNum(inputNum));
+
+        //2023/01/07
+        // 백준 설탕 나누기
+//        int num = in.nextInt();
+//        System.out.print(solution(num));
+
+        // 백준 셀프 넘버
+        /*boolean[] check = new boolean[10001];	// 1부터 10000이므로
+
+        for (int i = 1; i < 10001; i++){
+            int n = returnSelfNum(i);
+
+            if(n < 10001){	// 10000 이 넘는 수는 필요가 없음
+                check[n] = true;
+            }
+        }
+
+        for (int i = 1; i < 10001; i++) {
+            if (!check[i]) {
+                System.out.println(i);
+            }
+        }*/
+
+        // 백준 한수
+//        int num = in.nextInt();
+//        System.out.println(returnHanSoo(num));
+
+        // 백준 그룹 단어 체커
+//        int count = 0;
+//        int num = in.nextInt();
+//        for (int i = 0; i < num; i++) {
+//            if (check()) {
+//                count++;
+//            }
+//        }
+//        System.out.println(count);
+
+        // 2023/01/08
+        // 백준 ATM
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        int num = Integer.parseInt(br.readLine());
+        int[] arr = new int[num];
+
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        for(int i = 0; i < num; i++) {
+            arr[i] = Integer.parseInt(st.nextToken());
+        }
+
+        Arrays.sort(arr);
+
+        System.out.println(returnATM(arr));
+    }
+
+    private static int returnATM(int[] arr) {
+        int prev = 0;
+        int sum = 0;
+        for (int i = 0; i < arr.length; i++) {
+            sum += prev + arr[i];
+            prev += arr[i];
+        }
+        return sum;
+    }
+
+
+    private static int returnHanSoo(int num) {
+        int sum = 0;
+        if (num <= 99) {
+            sum = num;
+        } else {
+            sum = 99;
+
+            for(int i = 100; i <= num; i++){
+                int hun = i / 100; // 백의 자릿수
+                int ten = (i / 10) % 10; // 십의 자릿수
+                int one = i % 10;
+
+                if((hun - ten) == (ten - one)){
+                    sum++;
+                }
+            }
+        }
+        return sum;
+    }
+
+    private static int returnSelfNum(int num) {
+        // ex) 1234 -> 1234 + 4 + 3 + 2 + 1 = 1244
+        int sum = num;
+        while (num != 0) {
+            sum += num % 10;
+            num = num / 10;
+        }
+        return sum;
+    }
+
+    private static int returnSugar(int num) {
+        int num5 = 0;
+        // ex) 18kg -> 3kg, 5kg로 나눠서 최소한의 봉지 수 -> 5kg 3개, 3kg 1개
+        if (num == 4 || num == 7) {
+            return -1;
+        } else if (num % 5 == 0){
+            num5 = num / 5;
+        } else if (num % 5 == 1 || num % 5 == 3) {
+            num5 = (num/5) + 1;
+        } else if (num % 5 == 2 || num % 5 == 4) {
+            num5 = (num/5) + 2;
+        }
+        return num5;
+    }
+
+    private static StringBuilder returnBiggerNum(int inputNum) {
+        return null;
     }
 
     private static StringBuilder returnCompression(String inputString9) {
